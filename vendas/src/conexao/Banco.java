@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  */
 public class Banco {
 
-    private static final String DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/sistema_vendas";
     private static final String USER = "root";
-    private static final String PASS = "123qwe";
+    private static final String PASS = "q1w2e3";
 
     public static Connection getConnection() {
         try {
