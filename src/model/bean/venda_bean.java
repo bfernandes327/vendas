@@ -11,48 +11,32 @@ package model.bean;
  */
 public class venda_bean {
     
-    private int id;
-    private String descricao;
-    private int qtd;
-    private double preco;
-
-    public int getId() {
-        return id;
+       
+    private String data_venda;
+    private int total_venda;
+    private String obs;
+    
+    public String getdata_venda() {
+        return data_venda;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public int getQtd() {
-        return qtd;
-    }
-
-    public void setQtd(int qtd) {
-        this.qtd = qtd;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    } 
-
-    @Override
-    public String toString() {
-        return getDescricao(); //To change body of generated methods, choose Tools | Templates.
+    public void setdata_venda(String data) {
+        this.data_venda = data;
     }
     
+    public int gettotal_venda() {
+        return total_venda;
+    }
+
+    public void settotal_venda(int valor) {
+        this.total_venda = valor;
+    }
     
-    
+    public String getobs() {
+        return obs;
+    }
+
+    public void setobs(String obs) {
+        this.obs = obs;
+    }   
 }

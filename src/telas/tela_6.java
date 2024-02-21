@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package telas;
+import static java.lang.Integer.parseInt;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import model.bean.venda_bean;
+import modelo_query.dao.VendasDao;
 
 /**
  *
@@ -29,19 +34,21 @@ public class tela_6 extends javax.swing.JFrame {
         DINHEIRO = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         pagamentos = new javax.swing.JLabel();
+        hoje = new javax.swing.JLabel();
         dinheiro = new javax.swing.JLabel();
         cartao = new javax.swing.JLabel();
         cheque = new javax.swing.JLabel();
         troco = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
         obs = new javax.swing.JLabel();
-        obsField = new javax.swing.JTextField();
-        totalField = new javax.swing.JTextField();
-        dinheiroField = new javax.swing.JTextField();
-        cartaoField = new javax.swing.JTextField();
-        chequeField = new javax.swing.JTextField();
-        trocoField = new javax.swing.JTextField();
+        c6 = new javax.swing.JTextField();
+        c5 = new javax.swing.JTextField();
+        c1 = new javax.swing.JTextField();
+        c2 = new javax.swing.JTextField();
+        c3 = new javax.swing.JTextField();
+        c4 = new javax.swing.JTextField();
         finalizar = new javax.swing.JButton();
+        finalizar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -56,24 +63,33 @@ public class tela_6 extends javax.swing.JFrame {
         pagamentos.setForeground(new java.awt.Color(255, 255, 255));
         pagamentos.setText("Pagamentos");
 
+        hoje.setFont(new java.awt.Font("Stencil", 0, 24)); // NOI18N
+        hoje.setForeground(new java.awt.Color(255, 255, 255));
+        hoje.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        hoje.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(66, 66, 66)
                 .addComponent(pagamentos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                .addComponent(hoje, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(pagamentos)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pagamentos)
+                    .addComponent(hoje, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        DINHEIRO.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, -1));
+        DINHEIRO.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 120));
 
         dinheiro.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         dinheiro.setText("DINHEIRO:");
@@ -100,40 +116,106 @@ public class tela_6 extends javax.swing.JFrame {
         obs.setText("Obs.:");
         DINHEIRO.add(obs, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 166, -1, -1));
 
-        obsField.addActionListener(new java.awt.event.ActionListener() {
+        c6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                obsFieldActionPerformed(evt);
+                c6ActionPerformed(evt);
             }
         });
-        DINHEIRO.add(obsField, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 164, 330, 130));
-        DINHEIRO.add(totalField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 150, 30));
-        DINHEIRO.add(dinheiroField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 150, 30));
-        DINHEIRO.add(cartaoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 150, 30));
-        DINHEIRO.add(chequeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 150, 30));
-        DINHEIRO.add(trocoField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 150, 30));
+        DINHEIRO.add(c6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 164, 330, 130));
+        DINHEIRO.add(c5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 150, 30));
+
+        c1.setText("1");
+        DINHEIRO.add(c1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 150, 30));
+
+        c2.setText("2");
+        DINHEIRO.add(c2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 150, 30));
+
+        c3.setText("3");
+        c3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c3ActionPerformed(evt);
+            }
+        });
+        DINHEIRO.add(c3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 150, 30));
+
+        c4.setText("1");
+        DINHEIRO.add(c4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 150, 30));
 
         finalizar.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        finalizar.setText("Finalizar Venda");
-        DINHEIRO.add(finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 190, 40));
+        finalizar.setText("Salvar");
+        finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizarActionPerformed(evt);
+            }
+        });
+        DINHEIRO.add(finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 350, 130, 40));
+
+        finalizar1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        finalizar1.setText("Somar");
+        finalizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finalizar1ActionPerformed(evt);
+            }
+        });
+        DINHEIRO.add(finalizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 350, 130, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DINHEIRO, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(DINHEIRO, javax.swing.GroupLayout.PREFERRED_SIZE, 764, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DINHEIRO, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(DINHEIRO, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void obsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obsFieldActionPerformed
+    private void c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_obsFieldActionPerformed
+    }//GEN-LAST:event_c6ActionPerformed
+
+    private void finalizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizar1ActionPerformed
+        // TODO add your handling code here:
+        int a,b,c,d,e;
+        a = parseInt(c1.getText());
+        b = parseInt(c2.getText());
+        c = parseInt(c3.getText());
+        d = parseInt(c4.getText());
+        
+        e = a+b+c+d;
+        
+        c5.setText(" " + e);
+        
+        Date dataAtual = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dataFormatada = sdf.format (dataAtual);
+        hoje.setText(""+dataFormatada);
+        
+        venda_bean v = new venda_bean();
+        VendasDao dao = new VendasDao();
+        v.setdata_venda(""+dataFormatada);
+        v.settotal_venda(e);
+        v.setobs(""+c6);
+        dao.create(v);
+    }//GEN-LAST:event_finalizar1ActionPerformed
+
+    private void finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_finalizarActionPerformed
+
+    private void c3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_c3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,20 +255,22 @@ public class tela_6 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DINHEIRO;
+    private javax.swing.JTextField c1;
+    private javax.swing.JTextField c2;
+    private javax.swing.JTextField c3;
+    private javax.swing.JTextField c4;
+    private javax.swing.JTextField c5;
+    private javax.swing.JTextField c6;
     private javax.swing.JLabel cartao;
-    private javax.swing.JTextField cartaoField;
     private javax.swing.JLabel cheque;
-    private javax.swing.JTextField chequeField;
     private javax.swing.JLabel dinheiro;
-    private javax.swing.JTextField dinheiroField;
     private javax.swing.JButton finalizar;
+    private javax.swing.JButton finalizar1;
+    private javax.swing.JLabel hoje;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel obs;
-    private javax.swing.JTextField obsField;
     private javax.swing.JLabel pagamentos;
     private javax.swing.JLabel total;
-    private javax.swing.JTextField totalField;
     private javax.swing.JLabel troco;
-    private javax.swing.JTextField trocoField;
     // End of variables declaration//GEN-END:variables
 }
