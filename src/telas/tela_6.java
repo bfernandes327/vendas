@@ -40,8 +40,8 @@ public class tela_6 extends javax.swing.JFrame {
         cheque = new javax.swing.JLabel();
         troco = new javax.swing.JLabel();
         total = new javax.swing.JLabel();
-        obs = new javax.swing.JLabel();
-        c6 = new javax.swing.JTextField();
+        label = new javax.swing.JLabel();
+        obs = new javax.swing.JTextField();
         c5 = new javax.swing.JTextField();
         c1 = new javax.swing.JTextField();
         c2 = new javax.swing.JTextField();
@@ -112,16 +112,16 @@ public class tela_6 extends javax.swing.JFrame {
         total.setText("TOTAL:");
         DINHEIRO.add(total, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
 
-        obs.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        obs.setText("Obs.:");
-        DINHEIRO.add(obs, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 166, -1, -1));
+        label.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        label.setText("Obs.:");
+        DINHEIRO.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 166, -1, -1));
 
-        c6.addActionListener(new java.awt.event.ActionListener() {
+        obs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                c6ActionPerformed(evt);
+                obsActionPerformed(evt);
             }
         });
-        DINHEIRO.add(c6, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 164, 330, 130));
+        DINHEIRO.add(obs, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 164, 330, 130));
         DINHEIRO.add(c5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 150, 30));
 
         c1.setText("1");
@@ -180,12 +180,14 @@ public class tela_6 extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void c6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c6ActionPerformed
+    private void obsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_c6ActionPerformed
+    }//GEN-LAST:event_obsActionPerformed
 
     private void finalizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finalizar1ActionPerformed
         // TODO add your handling code here:
+        String observacao = obs.getText();
+        
         int a,b,c,d,e;
         a = parseInt(c1.getText());
         b = parseInt(c2.getText());
@@ -205,7 +207,7 @@ public class tela_6 extends javax.swing.JFrame {
         VendasDao dao = new VendasDao();
         v.setdata_venda(""+dataFormatada);
         v.settotal_venda(e);
-        v.setobs(""+c6);
+        v.setobs(observacao);
         dao.create(v);
     }//GEN-LAST:event_finalizar1ActionPerformed
 
@@ -260,7 +262,6 @@ public class tela_6 extends javax.swing.JFrame {
     private javax.swing.JTextField c3;
     private javax.swing.JTextField c4;
     private javax.swing.JTextField c5;
-    private javax.swing.JTextField c6;
     private javax.swing.JLabel cartao;
     private javax.swing.JLabel cheque;
     private javax.swing.JLabel dinheiro;
@@ -268,7 +269,8 @@ public class tela_6 extends javax.swing.JFrame {
     private javax.swing.JButton finalizar1;
     private javax.swing.JLabel hoje;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel obs;
+    private javax.swing.JLabel label;
+    private javax.swing.JTextField obs;
     private javax.swing.JLabel pagamentos;
     private javax.swing.JLabel total;
     private javax.swing.JLabel troco;
