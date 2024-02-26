@@ -67,6 +67,7 @@ public class ProdutoDAO {
                 produto.setDescricao(rs.getString("descricao"));
                 produto.setQtd(rs.getInt("qtd"));
                 produto.setPreco(rs.getDouble("preco"));
+                
                 produtos.add(produto);
             }
 

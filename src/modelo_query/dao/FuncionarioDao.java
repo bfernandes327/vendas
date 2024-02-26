@@ -31,7 +31,7 @@ public class FuncionarioDao {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (nome,email,celular,telefone,cep,endereco,numero,bairro,cidade,complemento,uf,rg,cpf,cargo,senha,acesso)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO funcionario (nome,email,celular,telefone,cep,endereco,numero,bairro,cidade,complemento,uf,rg,cpf,cargo,senha,acesso,login)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, v.getnome());
             stmt.setString(2, v.getemail());
             stmt.setString(3, v.getcelular());
@@ -48,6 +48,7 @@ public class FuncionarioDao {
             stmt.setString(14, v.getcargo());
             stmt.setString(15, v.getsenha());
             stmt.setString(16, v.getacesso());
+            stmt.setString(17, v.getlogin());
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
@@ -56,31 +57,32 @@ public class FuncionarioDao {
         } finally {
             Banco.closeConnection(con, stmt);
         }
-
     }
-
-    public List<Produto> read() {
+    
+    public List<Funcionario> read() {
 
         Connection con = Banco.getConnection();
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Produto> produtos = new ArrayList<>();
+        List<Funcionario> funcionarios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM produto");
+            stmt = con.prepareStatement("SELECT * FROM funcionario");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Produto produto = new Produto();
+                Funcionario funcionario = new Funcionario();
 
-                produto.setId(rs.getInt("id"));
-                produto.setDescricao(rs.getString("descricao"));
-                produto.setQtd(rs.getInt("qtd"));
-                produto.setPreco(rs.getDouble("preco"));
-                produtos.add(produto);
+                funcionario.setid(rs.getInt("id"));
+                funcionario.setnome(rs.getString("nome"));
+                funcionario.setemail(rs.getString("email"));
+                funcionario.setlogin(rs.getString("login"));
+                funcionario.setsenha(rs.getString("senha"));
+                
+                funcionarios.add(funcionario);
             }
 
         } catch (SQLException ex) {
@@ -89,9 +91,10 @@ public class FuncionarioDao {
             Banco.closeConnection(con, stmt, rs);
         }
 
-        return produtos;
+        return funcionarios;
 
     }
+    
     public List<Produto> readForDesc(String desc) {
 
         Connection con = Banco.getConnection();
@@ -128,18 +131,20 @@ public class FuncionarioDao {
 
     }
 
-    public void update(Produto p) {
+    public void update(Funcionario p) {
 
         Connection con = Banco.getConnection();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE produto SET descricao = ? ,qtd = ?,preco = ? WHERE id = ?");
-            stmt.setString(1, p.getDescricao());
-            stmt.setInt(2, p.getQtd());
-            stmt.setDouble(3, p.getPreco());
-            stmt.setInt(4, p.getId());
+            stmt = con.prepareStatement("UPDATE funcionario SET nome = ? ,email = ?,login = ?,senha = ? WHERE id = ?");
+            stmt.setString(1, p.getnome());
+            stmt.setString(2, p.getemail());
+            stmt.setString(3, p.getlogin());
+            stmt.setString(4, p.getsenha());
+            stmt.setInt(5, p.getid());
+            
 
             stmt.executeUpdate();
 
@@ -151,15 +156,15 @@ public class FuncionarioDao {
         }
 
     }
-    public void delete(Produto p) {
+    public void delete(Funcionario p) {
 
         Connection con = Banco.getConnection();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM produto WHERE id = ?");
-            stmt.setInt(1, p.getId());
+            stmt = con.prepareStatement("DELETE FROM funcionario WHERE id = ?");
+            stmt.setInt(1, p.getid());
 
             stmt.executeUpdate();
 
@@ -170,5 +175,6 @@ public class FuncionarioDao {
             Banco.closeConnection(con, stmt);
         }
 
-    }
+    } 
+   
 }

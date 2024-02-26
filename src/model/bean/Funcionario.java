@@ -11,7 +11,7 @@ package model.bean;
  */
 public class Funcionario {
     
-       
+    private int id;
     private String nome;
     private String email;
     private String celular;
@@ -28,7 +28,15 @@ public class Funcionario {
     private String senha;
     private String uf;
     private String acesso;
+    private String login;
     
+    public int getid() {
+        return id;
+    }
+
+    public void setid(int id) {
+        this.id = id;
+    }
     
     public String getnome() {
         return nome;
@@ -156,6 +164,14 @@ public class Funcionario {
     
     public String getacesso() {
         return acesso;
+    }
+    
+    public void setlogin(String login) {
+        this.login = login;
+    } 
+    
+    public String getlogin() {
+        return login;
     }
 
 }
